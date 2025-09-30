@@ -217,3 +217,4 @@ urlpatterns = [
 <img width="1022" height="858" alt="Postman Get Request for Films" src="https://github.com/user-attachments/assets/bda9da2b-028c-4cb9-a15a-c3a9165839ce" />
 
 <hr>
+
