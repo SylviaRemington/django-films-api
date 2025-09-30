@@ -12,25 +12,25 @@
    ```
 
 2. Install the package by running pipenv install django. After this you should have 2 files: Pipfile and Pipfile.lock. These are essentially the same as a package.json and a package-lock.json in a node/express app.
-- pipenv install django
+- **pipenv install django**
 
 3. Enter the shell by running pipenv shell
-- pipenv shell
+- **pipenv shell**
 
 4. To start a project run django-admin startproject project .
-- django-admin startproject project .
+- **django-admin startproject project .**
 - You should see that a folder called project has been created in the project directory, along with a manage.py file.
 
 5. Run pipenv install psycopg2-binary (this is a db-adapter which allows us to use postgresql)
-- pipenv install psycopg2-binary
+- **pipenv install psycopg2-binary**
 - (If you look in your Pipfile now, you should see that you have 2 dependencies: django and psycopg2-binary.)
-- pipenv install autopep8 --dev
+- **pipenv install autopep8 --dev**
 - (original code says -dev, but to make it work need to do --dev)
   
 6. (he has 8 in lesson) Now run this to start postgres brew services start postgresql@16
-- brew services start postgresql@16
+- **brew services start postgresql@16**
 
-7. THEN START YOUR VSCODE: code .
+7. THEN START YOUR VSCODE: **code .**
   
 ## VSCode
 - Head to your project/settings.py file in the project folder
@@ -50,9 +50,10 @@ DATABASES = { # added this to use postgres as the database instead of the defaul
 <hr>
 
 ### Terminal
-- Make a database by running: createdb films-api
-- (This name must match the name of the db in the settings.py file)
-- Run the server: python3 manage.py runserver **Depending on which Python you have, use that. I'm using python3 so need to use that to run the server!**
+- Make a database by running: **createdb films-api**
+- **(This name must match the name of the db in the settings.py file)**
+- Run the server: **python3 manage.py runserver**
+- (**Depending on which Python you have, use that. I'm using python3 so need to use that to run the server!**)
 
 ### If:
 - If you get an error about importing Django, run this: pip install django psycopg2-binary
@@ -60,13 +61,13 @@ DATABASES = { # added this to use postgres as the database instead of the defaul
 ### If Not:
 **RUNNING MIGRATIONS BELOW HERE:**
 - Notice the first error that comes up and nudge students that they will need to run migrations.
-- Stop the server ctrl+c (Need to stop the server in order to run migrations.)
+- **Stop the server ctrl+c (Need to stop the server in order to run migrations.)**
 - **Migrate the app: python3 manage.py migrate**
 - **Run the server again: python3 manage.py runserver**
 - No Errors! Boom.
 **(You should now be able to see the landing page if you navigate to http://localhost:8000 in the browser)**
   
-- Stop the server ctrl+c
+- **Stop the server ctrl+c**
 - **Create superuser: python3 manage.py createsuperuser**
 - (For creating superuser part we are making a very basic username, email address, and pswd so that the class can troubleshoot easily; however, for real-life situations, this is where you make a more in-depth username and password)
 - **Now start a new app: django-admin startapp films**
@@ -74,7 +75,7 @@ DATABASES = { # added this to use postgres as the database instead of the defaul
 <hr>
   
 ### VSCode
-- In settings.py in the project folder, add name of the app to the INSTALLED_APPS array - e.g. 'films', (at the end of the INSTALLED_APPS)
+- In settings.py in the project folder, **add name of the app to the INSTALLED_APPS array - e.g. 'films', (at the end of the INSTALLED_APPS)**
 - Move to models.py in the films folder
 - Create the films model:
 ```
@@ -107,18 +108,18 @@ admin.site.register(Film)
 ```
 
 ### Terminal
-- Run: python3 manage.py makemigrations
-- Then run: python3 manage.py migrate
-- Restart the server: python3 manage.py runserver
-- Navigate to http://localhost:8000/admin and login to create some database entries
+- Run: **python3 manage.py makemigrations**
+- Then run: **python3 manage.py migrate**
+- Restart the server: **python3 manage.py runserver**
+- **Navigate to http://localhost:8000/admin and login to create some database entries**
 - Add in a function to format the string to make it more readable: (if this doesn’t work, check that the function is indented into the class)
   **Question for Tristan or Luke: For the part above line 115 regarding adding a function to format the string, where are we doing this and why?**
   
 ## REST
 
 ### Terminal
-- Stop the server ctrl+c
-- Install the django rest framework pipenv install djangorestframework
+- **Stop the server ctrl+c**
+- Install the django rest framework: **pipenv install djangorestframework**
   
 ## VSCode
 Register this in our project/settings.py INSTALLED_APPS : ’rest_framework’ above our own app
@@ -136,7 +137,7 @@ INSTALLED_APPS = [
 ]
 ```
 
-- Inside the films folder create a new file called serializers.py
+- Inside the films folder create a new file called **serializers.py**
 
 - We need a serializer to convert python objects into JSON.
 
