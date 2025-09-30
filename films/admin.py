@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-# Importing the book from class
+# Importing the film from class
 from .models import Film
 
 # Registering with the admin - so admin can see it
