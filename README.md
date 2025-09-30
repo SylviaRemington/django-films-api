@@ -202,7 +202,9 @@ urlpatterns = [
     path('films/', include('films.urls')),
 ]
 ```
+
 <hr>
-- Run code at http://127.0.0.1:8000/ (once set up and doing python3 manage.py runserver) - http://localhost:8000 - you can see this landing page after setting up migrations
-- Run http://localhost:8000/admin/ (once fully set up)
-- Also after all is set up, you can go to Postman and set up a new Films Collection, create a GET request with http://localhost:8000/films and make sure it's working as per this screenshot below! Yuuuus! 
+
+- Run code at http://127.0.0.1:8000/ (once set up and doing python3 manage.py runserver) - http://localhost:8000 - you can see this landing page after setting up migrations <br>
+- Run http://localhost:8000/admin/ (once fully set up)<br>
+- Also after all is set up, you can go to Postman and set up a new Films Collection, create a GET request with http://localhost:8000/films and make sure it's working as per this screenshot below! Yuuuus! <br>
