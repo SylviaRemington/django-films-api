@@ -12,6 +12,6 @@ class FilmListView(APIView):
 
   def get(self, _request):
     films = Film.objects.all()
-    serialized_books = FilmSerializer(films, many=True)
+    serialized_films = FilmSerializer(films, many=True)
     return Response(serialized_films.data, status=status.HTTP_200_OK)
 
