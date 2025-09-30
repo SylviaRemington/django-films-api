@@ -206,5 +206,10 @@ urlpatterns = [
 <hr>
 
 - Run code at http://127.0.0.1:8000/ (once set up and doing python3 manage.py runserver) - http://localhost:8000 - you can see this landing page after setting up migrations <br>
-- Run http://localhost:8000/admin/ (once fully set up)<br>
+- Run http://localhost:8000/admin/ (once fully set up) & **can add Films in Django Admin** <br>
+<img width="1045" height="368" alt="DJANGO ADMIN" src="https://github.com/user-attachments/assets/c6e5342d-ea72-4b17-b4c3-cc3295ac45e1" />
+
 - Also after all is set up, you can go to Postman and set up a new Films Collection, create a GET request with http://localhost:8000/films and make sure it's working as per this screenshot below! Yuuuus! <br>
+<img width="1022" height="858" alt="Postman Get Request for Films" src="https://github.com/user-attachments/assets/bda9da2b-028c-4cb9-a15a-c3a9165839ce" />
+
+<hr>
