@@ -10,3 +10,4 @@ class Film(models.Model):
   director = models.CharField(max_length=50)
   genre = models.CharField(max_length=60)
   year = models.FloatField()
+  

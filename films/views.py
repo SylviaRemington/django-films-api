@@ -14,4 +14,3 @@ class FilmListView(APIView):
     films = Film.objects.all()
     serialized_films = FilmSerializer(films, many=True)
     return Response(serialized_films.data, status=status.HTTP_200_OK)
-
