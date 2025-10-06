@@ -1,3 +1,8 @@
+### Need to update sections (after Day 1 portion of Notes of this README) to reflect films-api and not books-api
+**Currently working on both books-api and films-api to get more practice building Django backend api.**
+
+<hr>
+
 # Django Films App - Using Restful Routes & Serializer <br>
 **Using restful routes & serializer (React) instead of HTML Templates since it is used more widely currently in the world per Tristan Hall**
 
