@@ -406,7 +406,7 @@ class BookDetailView(APIView):
 
 Try it out in postman - call all books and you should see the author is a number, but when you call a single book, the author is populated.
 
-# Comments
+## Comments
 
 ```sh
 django-admin startapp comments
@@ -420,6 +420,7 @@ django-admin startapp comments
 
 # Application definition
 
+```py
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -463,7 +464,8 @@ from .models import Comment
 admin.site.register(Comment)
 ```
 
-5. GOOD PRACTICE TO MAKE MIGRATIONS AFTER CREATE MODEL; HOWEVER, CAN MAKE MIGRATIONS LATER DOWN THIS LIST AS PER #7 - Makemigrations and migrate, then runserver and make sure you can see/create comments in the admin app (browser)
+5. GOOD PRACTICE TO MAKE MIGRATIONS AFTER CREATE MODEL; HOWEVER, CAN MAKE MIGRATIONS LATER DOWN THIS LIST AS PER #7
+- Makemigrations and migrate, then runserver and make sure you can see/create comments in the admin app (browser)
 
 6. Create a comments serializer:
 Create serializer.py in comments app. Then add the below code: 
@@ -498,16 +500,16 @@ class PopulatedBookSerializer(BookSerializer):
 ```
 
 7. Make your migrations.
-python manage.py makemigrations 
-python manage.py migrate
-python3 manage.py runserver
+- python manage.py makemigrations 
+- python manage.py migrate
+- python3 manage.py runserver
 
 
 8. Migrate (see 7 above)
 
 9. start the app with runserver (see 7 above)
 
-# Adding the URLs
+## Adding the URLs
 
 Let's start with the authors app.
 - Create a file urls.py - and add this info:
