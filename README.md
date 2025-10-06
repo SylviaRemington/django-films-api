@@ -808,3 +808,9 @@ A COMMENT NEEDS TO BE ASSOCIATED WITH A USER SO...
 STOPPING HERE AND WILL LEARN AUTHORIZATION AND THEN COME BACK TO THIS.
 (as of October 2nd, 2025 lecture)
 ```
+**STILL NEED TO DO:**
+- Implement the comments
+- Authentication so that users can register/login
+- Handle tokens & all the JOT stuff
+- Circular dependencies & how to structure my code to avoid this
+- Build a simple front end so we can get back to React land, to have a working full-stack application to then work off for your project.
