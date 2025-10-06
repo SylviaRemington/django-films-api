@@ -225,3 +225,380 @@ urlpatterns = [
 ## Part Three - Go to Day Three Steps of notes for building an api
 
 **Follow new notes entititled day-2(1).md in downloads**
+- Updating notes for myself and correcting them from class notes as much as possible:
+
+1. From the root of the project, run the startapp command to start a new "author" app
+
+```sh
+django-admin startapp authors
+```
+
+2. Register the authors app in the project/settings.py file in the "INSTALLED_APPS" list.
+
+```py
+
+# Application definition
+
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'rest_framework',
+    'books',
+    'authors'
+]
+```
+
+3. Now let's create the author model.
+
+```py
+from django.db import models
+
+class Author(models.Model):
+    def __str__(self):
+        return f'{self.name}'
+
+    name = models.TextField(max_length=300)
+```
+
+4. And now let's update the book model to have an author from the authors table, rather than free text.
+
+```py
+from django.db import models
+
+# Create your models here.
+class Book(models.Model):
+    def __str__(self):
+        return f'{self.title} - {self.author}'
+
+    # models.CharField is the data type and means "string"
+    title = models.CharField(max_length=80, unique=True)
+    author = models.ForeignKey(
+      "authors.Author",
+      related_name = "books",
+      on_delete = models.CASCADE
+    )
+    genre = models.CharField(max_length=60)
+    year = models.FloatField()
+```
+
+5. Drop and re-create the database the database.
+
+```sh
+dropdb books-api
+createdb books-api
+```
+
+6. python manage.py makemigrations && python manage.py migrate.
+
+7. Create superuser - python manage.py createsuperuser
+
+8. Register the model in authors/admin.py
+
+```py
+from django.contrib import admin
+# Register your models here.
+from .models import Author
+admin.site.register(Author)
+```
+
+```py
+from django.contrib import admin
+from .models import Author
+
+# Register your models here.
+admin.site.register(Author)
+```
+
+9. python manage.py runserver - go into the admin site and you can make a book and an author
+
+10. Make and serializers.py file in the authors folder and put this in it:
+So in authors folder, create file serialisers.py first. Then this is the code:
+
+```py
+from rest_framework import serializers
+from .models import Author
+
+class AuthorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Author
+        fields = '__all__'
+```
+
+11. Now let's create a PopulatedBookSerializer underneath the BookSerializer:
+(This is in the books app in serializer.py under BookSerializer.)
+
+```py
+from rest_framework import serializers
+from .models import Book
+from authors.serializers import AuthorSerializer
+
+class BookSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Book
+        fields = '__all__'
+
+class PopulatedBookSerializer(BookSerializer):
+    author = AuthorSerializer()
+```
+
+12. And finally, let's update the books views so that when we fetch all books, we use the BookSerializer, but when we get a single book, we use the PopulatedBookSerializer, so we get more information (in this case, the info about the author)
+
+- SO NOW NEED TO GO IN BOOKS TO VIEWS.PY AND IMPORT POPULATEDBOOKSERIALIZER & ADD serialized_book = PopulatedBookSerializer(book) second to last line change BookSerializer to PopulatedBookSerializer.
+
+
+
+```py
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from rest_framework.exceptions import NotFound # This provides a default response for a not found
+
+from .models import Book
+from .serializers import BookSerializer, PopulatedBookSerializer #add this here
+
+# Create your views here.
+
+class BookListView(APIView):
+
+    # handle a GET request in the BookListView
+    def get(self, _request):
+        # go to the database and get all the books
+        books = Book.objects.all()
+        # translate the books from the database to a usable form
+        serialized_books = BookSerializer(books, many=True)
+        # return the serialized data and a 200 status code
+        return Response(serialized_books.data, status=status.HTTP_200_OK)
+
+    def post(self, request):
+        book_to_add = BookSerializer(data=request.data)
+        try:
+           book_to_add.is_valid()
+           book_to_add.save()
+           return Response(book_to_add.data, status=status.HTTP_201_CREATED)
+        except Exception as e:
+            print("Error")
+            # the below is necessary because two different formats of errors are possible. string or object format.
+            # if it's string then e.__dict__ returns an empty dict {}
+            # so we'll check it's a dict first, and if it's empty (falsey) then we'll use str() to convert to a string
+            return Response(e.__dict__ if e.__dict__ else str(e), status=status.HTTP_422_UNPROCESSABLE_ENTITY)
+
+class BookDetailView(APIView):
+
+    # custom method to retrieve a book from the DB and error if it's not found
+    def get_book(self, pk):
+        try:
+            return Book.objects.get(pk=pk)
+        except Book.DoesNotExist:
+            raise NotFound(detail="Can't find that book")
+
+    def get(self, _request, pk):
+        try:
+            book = Book.objects.get(pk=pk)
+            serialized_book = PopulatedBookSerializer(book) #just change this here to PopulatedBookSerializer
+            return Response(serialized_book.data, status=status.HTTP_200_OK)
+        except Book.DoesNotExist:
+            raise NotFound(detail="Can't find that book")
+```
+
+Try it out in postman - call all books and you should see the author is a number, but when you call a single book, the author is populated.
+
+# Comments
+
+```sh
+django-admin startapp comments
+```
+
+2. Register the authors app in the project/settings.py file in the "INSTALLED_APPS" list.
+
+```py
+'comments',
+```
+
+# Application definition
+
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'rest_framework',
+    'books',
+    'authors',
+    'comments
+]
+```
+
+3. Create the Comment model
+
+```py
+from django.db import models
+
+# Create your models here.
+
+class Comment(models.Model):
+    def __str__(self):
+        return f'{self.text} - {self.book}'
+    text = models.TextField(max_length=300)
+    created_at = models.DateTimeField(auto_now_add=True)
+    book = models.ForeignKey(
+        "books.Book",
+        related_name = "comments",
+        on_delete=models.CASCADE
+    )
+```
+
+4. Register the Comment model in the admin app
+
+```py
+from django.contrib import admin
+
+# Register your models here.
+from .models import Comment
+admin.site.register(Comment)
+```
+
+5. GOOD PRACTICE TO MAKE MIGRATIONS AFTER CREATE MODEL; HOWEVER, CAN MAKE MIGRATIONS LATER DOWN THIS LIST AS PER #7 - Makemigrations and migrate, then runserver and make sure you can see/create comments in the admin app (browser)
+
+6. Create a comments serializer:
+Create serializer.py in comments app. Then add the below code: 
+
+```py
+from rest_framework import serializers
+from .models import Comment
+
+class CommentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Comment
+        fields = '__all__'
+```
+
+6. Update the PopulatedBookSerializer to add the comments:
+DO THIS BY GOING TO THE BOOKS APP AND THE SERIALIZER FILE IN serializers.py and add the following:
+
+```py
+from rest_framework import serializers
+from .models import Book
+from authors.serializers import AuthorSerializer
+from comments.serializers import CommentSerializer #ADD THIS HERE
+
+class BookSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Book
+        fields = '__all__'
+
+class PopulatedBookSerializer(BookSerializer):
+    author = AuthorSerializer()
+    comments = CommentSerializer(many=True) #ADD THIS HERE
+```
+
+7. Make your migrations.
+python manage.py makemigrations 
+python manage.py migrate
+python3 manage.py runserver
+
+
+8. Migrate (see 7 above)
+
+9. start the app with runserver (see 7 above)
+
+# Adding the URLs
+
+Let's start with the authors app.
+- Create a file urls.py - and add this info:
+
+```py
+from django.urls import path
+from .views import AuthorListView
+
+urlpatterns = [
+    path('', AuthorListView.as_view()),
+]
+```
+
+1. Views - create an authors list view:
+
+```py
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from rest_framework.exceptions import NotFound # This provides a default response for a not found
+
+from .models import Author
+from .serializers import AuthorSerializer
+
+# Create your views here.
+
+class AuthorListView(APIView):
+
+    # handle a GET request in the BookListView
+    def get(self, _request):
+        # go to the database and get all the authors
+        authors = Author.objects.all()
+        # translate the books from the database to a usable form
+        serialized_authors = AuthorSerializer(authors, many=True)
+        # return the serialized data and a 200 status code
+        return Response(serialized_authors.data, status=status.HTTP_200_OK)
+
+    def post(self, request):
+        author_to_add = AuthorSerializer(data=request.data)
+        try:
+           author_to_add.is_valid()
+           author_to_add.save()
+           return Response(author_to_add.data, status=status.HTTP_201_CREATED)
+        except Exception as e:
+            print("Error")
+            # the below is necessary because two different formats of errors are possible. string or object format.
+            # if it's string then e.__dict__ returns an empty dict {}
+            # so we'll check it's a dict first, and if it's empty (falsey) then we'll use str() to convert to a string
+            return Response(e.__dict__ if e.__dict__ else str(e), status=status.HTTP_422_UNPROCESSABLE_ENTITY)
+```
+
+2. Create the authors/urls.py file and populate it:
+
+```py
+from django.urls import path
+from .views import AuthorListView
+
+# http://localhost:8000/authors/
+urlpatterns = [
+    path('', AuthorListView.as_view()),
+]
+```
+
+3. Now add the authors routes to the prject urls:
+
+```py
+"""project URL Configuration
+
+The `urlpatterns` list routes URLs to views. For more information please see:
+    https://docs.djangoproject.com/en/3.2/topics/http/urls/
+Examples:
+Function views
+    1. Add an import:  from my_app import views
+    2. Add a URL to urlpatterns:  path('', views.home, name='home')
+Class-based views
+    1. Add an import:  from other_app.views import Home
+    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
+Including another URLconf
+    1. Import the include() function: from django.urls import include, path
+    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+"""
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('books/', include('books.urls')),
+    path('authors/', include('authors.urls')),
+]
+```
+
+4. You should be able to now test getting all the authors and creating an author in Postman.
+
+
