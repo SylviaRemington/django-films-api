@@ -218,3 +218,10 @@ urlpatterns = [
 
 <hr>
 
+## Part Two - Day Two Steps of Notes for building an api
+
+**Follow Day Two Steps - Per Lesson in class original materials materials**
+
+## Part Three - Day Three Steps of Notes for building an api
+
+**Follow new notes entititled day-2(1).md in downloads**
