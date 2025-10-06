@@ -418,7 +418,7 @@ django-admin startapp comments
 'comments',
 ```
 
-# Application definition
+## Application definition
 
 ```py
 INSTALLED_APPS = [
