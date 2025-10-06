@@ -221,16 +221,13 @@ urlpatterns = [
 
 
 <hr>
-
-
-
+<hr>
 
 
 
 ## Part Two - Go to Day Two Steps of notes for building an api
 
 **Follow Day Two Steps - Per Lesson in class original materials materials**
-# Day 2
 
 ## DJANGO API - CREATE & SHOW
 
@@ -418,7 +415,7 @@ And then let's update our get function to use the get_show function:
 
 
 <hr>
-
+<hr>
 
 ## Part Three - Go to Day Three Steps of notes for building an api
 
