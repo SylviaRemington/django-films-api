@@ -814,3 +814,6 @@ STOPPING HERE AND WILL LEARN AUTHORIZATION AND THEN COME BACK TO THIS.
 - Handle tokens & all the JOT stuff
 - Circular dependencies & how to structure my code to avoid this
 - Build a simple front end so we can get back to React land, to have a working full-stack application to then work off for your project.
+
+<hr>
+<hr>
