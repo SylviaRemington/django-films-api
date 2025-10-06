@@ -604,3 +604,12 @@ urlpatterns = [
 4. You should be able to now test getting all the authors and creating an author in Postman.
 
 
+<hr>
+
+```py
+ADDTL INFO TRISTAN DIDN'T TYPE OUT:
+
+A COMMENT NEEDS TO BE ASSOCIATED WITH A USER SO...
+STOPPING HERE AND WILL LEARN AUTHORIZATION AND THEN COME BACK TO THIS.
+(as of October 2nd, 2025 lecture)
+```
