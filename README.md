@@ -922,3 +922,126 @@ create books-api
 - python manage.py migrate 
 
 
+11. Create superuser:
+
+```sh
+python manage.py createsuperuser
+```
+
+12. Register User model on the admin app. get_user_model is a method that when invoked returns whatever model that our app is set up to use. In settings.py we specified that we will use our own custom model 'jwt_auth.User' so this is what will be returned.
+
+- GO TO admin.py in folder of jwt_auth and do the following:
+
+Put this in the `jwt_auth/admin.py` file:
+
+```py
+from django.contrib import admin
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
+admin.site.register(User) # then we'll register this to the admin as usual
+
+```
+
+13. NOW GOING TO INSTALL SOME JWT PACKAGES
+
+13. Users to be created through the API
+
+```sh
+pipenv install pyjwt
+```
+
+# going to deal with token before login/register
+
+14. Create a new file in the jwt_auth folder called authentication.py
+- **In jwt_auth, create authentication.py and add the following code:
+
+fill out auth file with:
+
+```py
+from rest_framework.authentication import BasicAuthentication
+from rest_framework.exceptions import PermissionDenied
+from django.contrib.auth import get_user_model
+from django.conf import settings  # show secret key in settings.py
+import jwt
+
+User = get_user_model()
+
+# BasicAuthentication has stuff built in like password & email validation
+
+
+# assertain users permissions # requests come through here # assign a permission level # if valid token -> given permission to see secure things
+class JWTAuthentication(BasicAuthentication):
+    def authenticate(self, request):  # check requets has token and return if so
+
+        header = request.headers.get('Authorization')
+
+        # if no headers, just return to end the request
+        if not header:
+            return None
+
+        # if token is wrong format, throw error
+        if not header.startswith('Bearer'):
+            raise PermissionDenied(detail='Invalid Auth token')
+
+        # pass all checks, store token in variable
+        token = header.replace('Bearer ', '')
+
+        # get payload with users id from token & algorithms
+        try:
+            # can show https://jwt.io again so they can see the alg and the secret
+            # HS256 is default, it will be this unless we specify a different alg when we sign the token
+            payload = jwt.decode(token, settings.SECRET_KEY,
+                                 algorithms=['HS256'])
+
+            # find user with that id in db
+            user = User.objects.get(pk=payload.get('sub'))
+            print('USER ->', user)
+            # issue with the token
+
+            # if we get an error when decoding it will fall into the below exception
+        except jwt.exceptions.InvalidTokenError:
+            raise PermissionDenied(detail='Invalid Token')
+
+        # If the user does not exist it will fall into the below
+        except User.DoesNotExist:
+            raise PermissionDenied(detail='User Not Found')
+
+        # if all good, return user and the token
+        return (user, token)
+```
+**IF WANT MORE INFORMATION, SEE NOTES IN JWT AUTHENTICATION.PY.**
+
+
+14. We now need to add REST_FRAMEWORK intothe `project/settings.py`:
+
+The first part is telling Django to render in JSON, although the serializers are doing this for us we can confirm here.
+Second part is telling rest_framework and django that we are using the JWTAuthentication class we just created as the default
+- ADD THE BELOW CODE UNDER LINE OF: ROOT_URLCONF = 'project.urls'
+
+```py
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+    ],
+
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'jwt_auth.authentication.JWTAuthentication'
+        ],
+}
+```
+**Explanation of rest framework in settings.py (above) in django-books-api page notes.**
+
+15. Next we'll control who see's what:
+
+- In `books/views.py` add imports for permissions from rest_frameworks.permissions.
+- IsAuthenticatedOrReadOnly has method that enforces every method except GET to throw a permissions error
+- there's another one too, IsAuthenticated, that applies to all methods
+
+add this import the the books/views.py file:
+
+```py
+from rest_framework.permissions import IsAuthenticatedOrReadOnly # IsAuthenticatedOrReadOnly specifies that a view is secure on all methods except get requests
+```
+
