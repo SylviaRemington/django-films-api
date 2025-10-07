@@ -823,3 +823,62 @@ STOPPING HERE AND WILL LEARN AUTHORIZATION AND THEN COME BACK TO THIS.
 
 <hr>
 <hr>
+# Authentication
+# Adding Authentication With a Custom User
+
+We want to use jwt token for auth again but django isn't set up for this as defualt.
+We also want to add secure route functionality like we've done before.
+We want to register and login.
+
+1. Start a new app called jwt_auth
+
+```sh
+django-admin startapp jwt_auth
+```
+
+2. Add the app the in INSTALLED_APPS in `project/settings.py`
+
+```py
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'rest_framework',
+    'books',
+    'authors',
+    'comments',
+    'jwt_auth',
+]
+```
+
+3. Django already has a user model, it's how we add a superuser. In `project/settings.py`, add the below to specifiy which model we intend to use:
+
+- **PUT THIS UNDERNEATH INSTALLED APPS.**
+
+```py
+AUTH_USER_MODEL = 'jwt_auth.User'
+```
+
+**ADDING OUR NEW MODEL NEXT AS PER BELOW**
+
+4. in `jwt_auth/models.py` we'll add our new model.
+
+django already has password, password confirmation & username so we don't need to add them. It doesnt make email required so want to change that. By defining these fields we make them required.
+
+By default, django already has a user model (the one for superusers etc) and it's called the AbstractUser
+we want to build on top of that.
+
+```py
+from django.db import models
+from django.contrib.auth.models import AbstractUser # user model that already exists in django
+
+class User(AbstractUser): # we extend the AbstractUser and add the fields that we want for our users
+    email = models.CharField(max_length=50, unique=True)
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
+    profile_image = models.CharField(max_length=300)
+```
+
