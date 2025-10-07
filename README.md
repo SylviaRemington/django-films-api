@@ -233,6 +233,7 @@ urlpatterns = [
 ## Part Two - Go to Day Two Steps of notes for building an api
 
 **Follow Day Two Steps - Per Lesson in class original materials materials**
+- This part below is using the django-books-api code and needs to be transformed into django-films-api code. Just fyi.
 
 ## DJANGO API - CREATE & SHOW
 
