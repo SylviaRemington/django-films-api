@@ -882,3 +882,43 @@ class User(AbstractUser): # we extend the AbstractUser and add the fields that w
     profile_image = models.CharField(max_length=300)
 ```
 
+5. makemigrations and migrate
+- python manage.py makemigrations
+- python manage.py migrate  
+
+There will be an error on migrate because django is confused here because a user exists but we've just created a new model. The migration history at this point is a little bit all over the place so let's reset so no migrations exist. We only have to do this as we're doing auth last. Usually, you would build authentication first, so we wouldn't need to do this bit in the real world.
+
+<br>
+**Because learning this through General Assembly, they are having us do the Authentication later. In real world scenarios, we will be doing Authentication first so we won't run into this problem. However, next couple steps are required for this project and how we are learning.**
+
+
+6. Create backups:
+- (After you do #6 below, there will be a seeds.json file in your folder with the backups. It will be a seed json file with all of my books from my database.)
+
+```sh
+python manage.py dumpdata books --output books/seeds.json --indent=2
+python manage.py dumpdata authors --output authors/seeds.json --indent=2
+python manage.py dumpdata comments --output comments/seeds.json --indent=2
+```
+
+7. Drop database:
+
+```sh
+dropdb books-api
+```
+
+8. Delete migration files: - in each app, open the migrations folder and delete everything except the `__init__.py` files . In each app there is a trace of all migrations of anything you've ever created. So what we want to do it reset all the migrations.
+
+- **So for this you have to go into the migrations files for authors, books, comments and... AND delete the 001_ 002_ files that are there.**
+
+9. Recreate db:
+
+```sh
+create books-api
+```
+
+10. Then can Make migrations and migrate (after created new database)
+- python manage.py makemigrations
+- python manage.py migrate 
+
+
