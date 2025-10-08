@@ -1269,7 +1269,7 @@ path('login/', LoginView.as_view())
 
 <hr>
 
-**This #23 below, we didn't do in class.**
+**This #23 below, we didn't do in class.** <br>
 23. Add product in insomnia
 
 <hr>
@@ -1409,7 +1409,7 @@ class CommentSerializer(serializers.ModelSerializer):
         fields = '__all__'
 ```
 
-29. Then need to add Comment Serializer to comment views.py:
+29. Then need to add Comment Serializer to comment views.py: 1:22:49
 - This is the entire code after adding this under CommentListView and adding import of CommentSerializer:
 
 ```py
