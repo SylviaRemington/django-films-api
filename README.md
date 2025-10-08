@@ -1115,7 +1115,9 @@ class UserSerializer(serializers.ModelSerializer): # never converted to json and
 
 **FOR MORE INFO ABOUT THE ABOVE FUNCTION, PLEASE SEE DJANGO-BOOKS-API IN JWT FILE UNDER SERIALIZER FOR MORE NOTES**
 
+<br>
 
+**Next we are going to work on jwt auth views.py because working towards having a login endpoint and a register endpoint.**
 
 18. jwt_auth/views.py
 
@@ -1144,3 +1146,4 @@ class RegisterView(APIView):
             return Response({'message': 'Registration successful'}, status=status.HTTP_202_ACCEPTED)
         return Response(user_to_create.errors, status=status.HTTP_422_UNPROCESSABLE_ENTITY)
 ```
+- Now, need to add this to our urls.py
