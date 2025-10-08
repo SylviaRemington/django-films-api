@@ -1251,6 +1251,10 @@ path('login/', LoginView.as_view())
 
 <img width="1022" height="858" alt="Postman GET request screenshot" src="images/IMAGE.png" />
 
+- **Now we have token and user's username. SO NOW OUR USERS CAN REGISTER & LOGIN.**
+### ADDTL IMAGE
+<img width="1022" height="858" alt="Postman GET request screenshot" src="images/IMAGE2.png" />
+
 <hr>
 
 
