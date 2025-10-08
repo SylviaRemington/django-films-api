@@ -1047,3 +1047,17 @@ add this import the the books/views.py file: <br>
 from rest_framework.permissions import IsAuthenticatedOrReadOnly # IsAuthenticatedOrReadOnly specifies that a view is secure on all methods except get requests
 ```
 
+
+16. inside BooksListView, as the first line inside the class, add:
+
+```py
+# If you want this to be only for authenticated uses... then do IsAuthenticated instead.
+permission_classes = (IsAuthenticatedOrReadOnly, ) # tuple, requires trailing comma
+```
+SO IT WILL LOOK LIKE THIS:
+```py
+class BookListView(APIView):
+  # If you want this to be only for authenticated uses... then do IsAuthenticated instead.
+  permission_classes = (IsAuthenticatedOrReadOnly)
+```
+
