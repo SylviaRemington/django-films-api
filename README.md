@@ -1250,4 +1250,7 @@ path('login/', LoginView.as_view())
 - LOGIN POST request - See screenshot below: <br>
 
 <img width="1022" height="858" alt="Postman GET request screenshot" src="images/IMAGE.png" />
-![Postman GET request screenshot](images/IMAGE.png)
+
+<hr>
+
+
