@@ -1450,5 +1450,10 @@ class CommentDetailView(APIView):
 30. So in POSTMAN when we create the comment, need to send text, book, and owner.
 We don't need a created_at because it is an add now.
 
+### REMEMBER, the BOOK and the OWNER are foreign keys.
+
+<hr>
+
+30. POSTMAN info continued:
 
 
