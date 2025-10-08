@@ -1386,9 +1386,6 @@ from .serializers import CommentSerializer
 class CommentListView(APIView):
     def post(self, request):
         print("CREATING COMMENT WITH USER ID", request.user.id)
-        # request.data['owner'] = request.user.def form_invalid(self, form):
-        #     response = super().form_invalid(form)
-        #     comment_to_add
         
 class CommentDetailView(APIView):
     def get(self, request):
