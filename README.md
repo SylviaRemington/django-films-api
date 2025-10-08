@@ -1039,7 +1039,9 @@ REST_FRAMEWORK = {
 - IsAuthenticatedOrReadOnly has method that enforces every method except GET to throw a permissions error
 - there's another one too, IsAuthenticated, that applies to all methods
 
-add this import the the books/views.py file:
+add this import the the books/views.py file: <br>
+**!!! BUT NOTE: # This means the user needs to be signed in to do something and use IsAuthenticated - for safety-tracker/ But if you want the ability for anyone to see books, can use this one.**
+
 
 ```py
 from rest_framework.permissions import IsAuthenticatedOrReadOnly # IsAuthenticatedOrReadOnly specifies that a view is secure on all methods except get requests
