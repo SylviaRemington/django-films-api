@@ -1457,3 +1457,27 @@ We don't need a created_at because it is an add now.
 30. POSTMAN info continued:
 
 
+
+
+31. CORRECTED COMMENTS MODEL HERE AS OF END OF DAY 3 CLASS ON DJANGO REACT LECTURE:
+
+```py
+from django.db import models
+
+# Create your models here.
+class Comment(models.Model):
+    def __str__(self):
+        return f'{self.text} - {self.book}'
+    text = models.TextField(max_length=300)
+    created_at = models.DateTimeField(auto_now_add=True)
+    book = models.ForeignKey(
+        "books.Book",
+        related_name="comments",
+        on_delete=models.CASCADE
+    )
+    owner = models.ForeignKey(
+        "jwt_auth.User",
+        related_name="comments",
+        on_delete=models.CASCADE
+    )
+```
