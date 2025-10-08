@@ -1331,5 +1331,8 @@ class Comment(models.Model):
         on_delete=models.CASCADE
     )
 ```
+- 1:10:31 is where editable=False was added to the comments model under owner at line 31, and that is where the code started breaking. So I took it off of this one.
+
+<hr>
 
 #? 25. makemigrations, get an error because existing reviews don't have an owner
