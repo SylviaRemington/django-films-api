@@ -1173,7 +1173,7 @@ path('auth/', include('jwt_auth.urls')),
 
 
 22. Make a register request in postman
-- **GO TO POSTMAN**
+- **---------GO TO POSTMAN---------**
 - Add a new request called: REGISTER
 - In it, MAKE A POST REQUEST TO http://localhost:8000/auth/register/
 - Make sure the body is raw and JSON selected.
@@ -1187,10 +1187,18 @@ path('auth/', include('jwt_auth.urls')),
     "password_confirmation": "Password1",
     "first_name": "Sylvia",
     "last_name": "Remington",
-    "profile_image": "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.threads.com%2F%40sylvia.remington&psig=AOvVaw2-AdmHCw-FVriuxsJ2-wYN&ust=1759979688400000&source=images&cd=vfe&opi=89978449&ved=0CBMQjRxqFwoTCKi867nRk5ADFQAAAAAdAAAAABAE"
+    "profile_image": "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.threads.com%2F%40sylvia.remington&psig=AOvVaw2-AdmHCw-FVriuxsJ2-wYN&ust=1759979688400000&source=images&cd=vfe&opi=89978449&ved=0CBMQjRxqFwoTCKi867nRk5ADFQAAAAAdAAAAABAE",
+    "username": "SylviaRemington"
 }
 ```
+- **Also, if you change anything to the model --e.g. CharField max length-- You need to do makemigrations and migrate.**
 
-# use short pass and get error from below line of validate function in the UserSerializer:
+- **Also, if adding image for this, use "Copy Link Address".**
+
+- For POSTMAN, test your POST route and make sure it's successful before moving on.
+- Then you can go to your admin site at http://localhost:8000/admin/ and see your User field there and see newly created User! Yay.
+
+
+## Use short pass and get error from below line of validate function in the UserSerializer:
 
 password_validation.validate_password(password=password)
