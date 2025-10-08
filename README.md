@@ -1335,4 +1335,32 @@ class Comment(models.Model):
 
 <hr>
 
-#? 25. makemigrations, get an error because existing reviews don't have an owner
+## Now setting it up so we can create comments. 1:11:37 in Oct 6th recording
+### FROM HERE ON DOWN, THESE ARE MY NOTES FOR WHAT'S NEXT.
+25. Create in comments folder urls.py file with this code:
+
+```py
+# IMPORTS
+from django.urls import path
+# CommentListView will pass in the create function.
+from .views import CommentListView, CommentDetailView
+
+# URLS
+# URLS.PY IS FOR THE PATHS - urls deal with the views
+# Need to at least have a url so we can create a comment.
+urlpatterns = [
+  # If it's just endpoint of "/books" then it will be this view; however, if it has an id, it will be the next path below.
+  path('', CommentListView.as_view()),
+
+  # This below is Django's way of doing :id, and uses '<int:pk>' instead.
+  # It expects it to have an integer which is called the pk.
+  # Don't need to also add this path to the project urls.py because this falls under the books urls.
+  # path('<int:pk>/', CommentDetailView.as_view()), //Will use CommentDetailView later.
+]
+```
+26. ADD PATH IN PROJECT FOLDER UNDER URLS.PY:
+
+```py
+path('comments/', include('comments.urls')),
+```
+
