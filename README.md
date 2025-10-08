@@ -1178,6 +1178,18 @@ path('auth/', include('jwt_auth.urls')),
 - In it, MAKE A POST REQUEST TO http://localhost:8000/auth/register/
 - Make sure the body is raw and JSON selected.
 - Then put in data in first field box using the model as reference for what need to send.
+- EXAMPLE BELOW (Note: if getting an image, copy the link address.)
+
+```py
+{
+    "email": "sylviaremington@gmail.com",
+    "password": "Password1",
+    "password_confirmation": "Password1",
+    "first_name": "Sylvia",
+    "last_name": "Remington",
+    "profile_image": "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.threads.com%2F%40sylvia.remington&psig=AOvVaw2-AdmHCw-FVriuxsJ2-wYN&ust=1759979688400000&source=images&cd=vfe&opi=89978449&ved=0CBMQjRxqFwoTCKi867nRk5ADFQAAAAAdAAAAABAE"
+}
+```
 
 # use short pass and get error from below line of validate function in the UserSerializer:
 
