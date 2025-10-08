@@ -1240,4 +1240,12 @@ class LoginView(APIView):
         return Response({ 'token': token, 'message': f"Welcome back {user_to_login.username}"})
 ```
 
+22. Add path to jwt_auth/urls.py:
+
+```py
+path('login/', LoginView.as_view())
+```
+- Now, after this, you should be able to go to POSTMAN.
+- Grab the email and password, create a new request in POSTMAN. (1:02:11 of October 6th 2025 recording)
+- LOGIN POST request - See screenshot below:
 
