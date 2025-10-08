@@ -1146,4 +1146,38 @@ class RegisterView(APIView):
             return Response({'message': 'Registration successful'}, status=status.HTTP_202_ACCEPTED)
         return Response(user_to_create.errors, status=status.HTTP_422_UNPROCESSABLE_ENTITY)
 ```
-- Now, need to add this to our urls.py
+
+- **Now, need to add this to our urls.py**
+
+19. configure the urls for the jwt_auth app in `jwt_auth/urls.py`:
+- **Meaning: Create a new file in JWT AUTH called urls.py and add the following code into it.**
+
+```py
+from django.urls import path
+from .views import RegisterView
+
+urlpatterns = [
+path('register/', RegisterView.as_view())
+]
+```
+
+
+20. add urls to `project/urls.py`:
+- **GO TO PROJECT FILE & URLS.PY THERE**
+
+```py
+path('auth/', include('jwt_auth.urls')),
+```
+
+21. Add these urls to the project/urls.py - DUPLICATE LINE IN TRISTAN'S CODE
+
+
+22. Make a register request in postman
+- **GO TO POSTMAN**
+- Add a new request called: REGISTER
+- In it, MAKE A POST REQUEST TO http://localhost:8000/auth/register/
+- 
+
+# use short pass and get error from below line of validate function in the UserSerializer:
+
+password_validation.validate_password(password=password)
