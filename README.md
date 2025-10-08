@@ -1176,7 +1176,8 @@ path('auth/', include('jwt_auth.urls')),
 - **GO TO POSTMAN**
 - Add a new request called: REGISTER
 - In it, MAKE A POST REQUEST TO http://localhost:8000/auth/register/
-- 
+- Make sure the body is raw and JSON selected.
+- Then put in data in first field box using the model as reference for what need to send.
 
 # use short pass and get error from below line of validate function in the UserSerializer:
 
