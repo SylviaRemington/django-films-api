@@ -1249,5 +1249,5 @@ path('login/', LoginView.as_view())
 - Grab the email and password, create a new request in POSTMAN. (1:02:11 of October 6th 2025 recording)
 - LOGIN POST request - See screenshot below: <br>
 
-<img width="1022" height="858" alt="Postman GET request screenshot" src="images/#22IMAGE.png" />
-![Postman GET request screenshot](images/#22IMAGE.png)
+<img width="1022" height="858" alt="Postman GET request screenshot" src="images/IMAGE.png" />
+![Postman GET request screenshot](images/IMAGE.png)
