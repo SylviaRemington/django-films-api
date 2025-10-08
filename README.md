@@ -1275,16 +1275,13 @@ path('login/', LoginView.as_view())
 <hr>
 
 24. Creating relationship between user and reviews:
-
-### One to many
+-  One to many
 
 ### reviews/models.py -> Add a ForeignKey:
 
-owner = models.ForeignKey( # if you call it user, I think it can clash with django fields so I tend to use owner
-"jwt_auth.User",
-related_name="reviews",
-on_delete=models.CASCADE
-)
+### This is Tristan's origin code. With corrected code further down:
+
+**owner = models.ForeignKey( # if you call it user, I think it can clash with django fields so I tend to use owner "jwt_auth.User", related_name="reviews", on_delete=models.CASCADE)**
 
 ### Correct code here:
 
