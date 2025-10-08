@@ -1261,3 +1261,8 @@ path('login/', LoginView.as_view())
 <hr>
 
 ## Now we're going to get "Comments" going (from where we left off last time)
+- We already added comments to installed apps in project folder, settings.py.
+- We created a Comment model in models.py (in the comments folder).
+- Now, we're going off script and going to add an owner to the comment. (This is where the code broke down around 1:05:19 in the lesson.)
+- We can't do 'user' on a model because it clashes with Django and special words.
+
