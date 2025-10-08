@@ -1280,6 +1280,9 @@ path('login/', LoginView.as_view())
 
 ### reviews/models.py -> Add a ForeignKey: <br>
 
+<br>
+<br>
+
 **This is Tristan's origin code. With corrected code further down:** <br>
 
 **owner = models.ForeignKey( # if you call it user, I think it can clash with django fields so I tend to use owner "jwt_auth.User", related_name="reviews", on_delete=models.CASCADE)**
