@@ -1198,7 +1198,14 @@ path('auth/', include('jwt_auth.urls')),
 - For POSTMAN, test your POST route and make sure it's successful before moving on.
 - Then you can go to your admin site at http://localhost:8000/admin/ and see your User field there and see newly created User! Yay.
 
+<hr>
 
-## Use short pass and get error from below line of validate function in the UserSerializer:
-
+### NOT SURE WHAT THIS PART BELOW IS FOR??? //!!! ASK TRISTAN OR LUKE ABOUT THIS
+### Use short pass and get error from below line of validate function in the UserSerializer:
 password_validation.validate_password(password=password)
+
+<hr>
+
+# Now, going to figure out how to login.
+
+
