@@ -1083,7 +1083,7 @@ class UserSerializer(serializers.ModelSerializer): # never converted to json and
     # check our passwords match
     # hash our passwords
     # add back to database
-    
+
     def validate(self, data): # data comes from the request body
         print('DATA',data)
 
@@ -1099,7 +1099,7 @@ class UserSerializer(serializers.ModelSerializer): # never converted to json and
         try:
             password_validation.validate_password(password=password)
         except ValidationError as err:
-            print('VALIDATION ERROR:': err.message)
+            print({'VALIDATION ERROR:': err.message})
             raise ValidationError({'password: ': err.message })
 
         # hash the password, reassigning value on dict
