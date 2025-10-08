@@ -1278,7 +1278,7 @@ path('login/', LoginView.as_view())
 
 ### One to many
 
-### reviews/models.py -> Add a ForeignKey:
+### reviews/models.py -> Add a ForeignKey: <br>
 
 **This is Tristan's origin code. With corrected code further down:** <br>
 
