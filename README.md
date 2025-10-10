@@ -1482,3 +1482,5 @@ class Comment(models.Model):
         on_delete=models.CASCADE
     )
 ```
+
+
